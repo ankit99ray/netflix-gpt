@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-scrollbar {
+    overflow-y: scroll;             /* Ensure the scrollbar is enabled */
+    scrollbar-width: none;          /* Hide scrollbar for Firefox */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 0;                       /* Hide scrollbar for WebKit browsers */
+  }

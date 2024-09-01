@@ -8,7 +8,7 @@ const Browse = () => {
   useNowPlayingMovies();
   
   return (
-    <div>
+    <div className='bg-black'>
         <MainContainer/>
         <SecondaryContainer/>
     </div>
