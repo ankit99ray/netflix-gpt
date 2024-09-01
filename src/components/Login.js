@@ -1,17 +1,15 @@
 import React, { useRef, useState } from 'react'
-import Header from './Header'
 import {checkPasswordMatch, checkValidData} from "../utils/validate"
 import { auth } from '../utils/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { addUser } from '../utils/userSlice'
+import { NETFLIX_BACKGROUND_IMAGE } from '../utils/constants'
 
 const Login = () => {
     
     const [isSignIn, setIsSignIn] = useState(true);
     const [errorMessage, setErrorMessage] = useState(null);
-    const navigate = useNavigate();
     const dispath = useDispatch();
 
     const toggleSignInForm =() => {
@@ -54,8 +52,6 @@ const Login = () => {
                                 email: email, 
                                 displayName: displayName
                             }));
-                        navigate("/browse");
-
                       }).catch((error) => {
                             setErrorMessage(error.message);
                       });
@@ -73,8 +69,6 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed in 
                     const user = userCredential.user;
-                    navigate("/browse");
-                    // console.log(user);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -87,10 +81,9 @@ const Login = () => {
 
   return (
     <div>
-        <Header/>
         <div className='absolute'>
             <img 
-                src='https://assets.nflxext.com/ffe/siteui/vlv3/dae1f45f-c2c5-4a62-8d58-6e1b0c6b2d8e/6d1fb8a4-5844-42a4-9b01-1c6c128acf19/IN-en-20240827-TRIFECTA-perspective_WEB_c292a608-cdc6-4686-8dc8-405bfcf753af_large.jpg'
+                src={NETFLIX_BACKGROUND_IMAGE}
                 alt='nteflix-background'
             />
         </div>

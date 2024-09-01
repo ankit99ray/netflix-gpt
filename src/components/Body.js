@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from '../utils/firebase'
 import { useDispatch } from 'react-redux'
 import {addUser, removeUser} from "../utils/userSlice"
+import Header from './Header'
 
 const Body = () => {
 
@@ -14,7 +15,7 @@ const Body = () => {
 
     useEffect(() => {
         
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
               // User is signed in, see docs for a list of available properties
               // https://firebase.google.com/docs/reference/js/auth.user
@@ -33,10 +34,13 @@ const Body = () => {
             }
           });
 
+      return () => unsubscribe();
+
     }, []);
 
   return (
     <div>
+        <Header/>
         <Outlet/>
     </div>
   )
